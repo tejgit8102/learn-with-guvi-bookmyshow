@@ -11,7 +11,7 @@ window.onload = async () => {
 async function fetchMovieDetails(movieId) {
   try {
     const response = await fetch(
-      `https://learn-with-guvi-book-my-show-backend.onrender.com/movie/${movieId}`
+      `https://learn-with-guvi-backend-1.onrender.com/movie/${movieId}`
     );
     const movie = await response.json();
 
