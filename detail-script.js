@@ -11,7 +11,7 @@ window.onload = async () => {
 async function fetchMovieDetails(movieId) {
   try {
     const response = await fetch(
-      `https://learn-with-guvi-backend-1.onrender.com/movie/${movieId}`
+      `https://learn-with-guvi-book-my-show-backend.onrender.com/movie/${movieId}`
     );
     const movie = await response.json();
 
@@ -66,15 +66,14 @@ async function fetchMovieDetails(movieId) {
                             </thead>
                             <tbody>
                                 ${Object.entries(movie.shows)
-                                  .flatMap(([date, showtimes]) =>
-                                    showtimes.map(
-                                      (show, index) => `
+          .flatMap(([date, showtimes]) =>
+            showtimes.map(
+              (show, index) => `
                                     <tr>
-                                        ${
-                                          index === 0
-                                            ? `<td rowSpan="${showtimes.length}" class="align-middle"><strong>${date}</strong></td>`
-                                            : ""
-                                        }
+                                        ${index === 0
+                  ? `<td rowSpan="${showtimes.length}" class="align-middle"><strong>${date}</strong></td>`
+                  : ""
+                }
                                         <td>
                                             <div class="border p-1" style="display: flex; flex-direction: column; align-items: center;">
                                                 <div>${show.time}</div>
@@ -88,16 +87,14 @@ async function fetchMovieDetails(movieId) {
                                         </td>
                                         <td>
                                             <!-- Button to book tickets -->
-                                            <button class="btn btn-sm btn-danger p-3 d-block w-100" onclick="bookTickets('${
-                                              movie._id
-                                            }', '${
-                                        show.id
-                                      }', '${date}')">Book Tickets</button>
+                                            <button class="btn btn-sm btn-danger p-3 d-block w-100" onclick="bookTickets('${movie._id
+                }', '${show.id
+                }', '${date}')">Book Tickets</button>
                                         </td>
                                     </tr>`
-                                    )
-                                  )
-                                  .join("")}
+            )
+          )
+          .join("")}
                             </tbody>
                         </table>
                     </div>
@@ -105,7 +102,7 @@ async function fetchMovieDetails(movieId) {
             `;
       document.body.appendChild(showContainer);
     }
-  } catch (error) {}
+  } catch (error) { }
 }
 
 document.getElementById("submitBooking").addEventListener("click", async () => {
@@ -119,7 +116,7 @@ document.getElementById("submitBooking").addEventListener("click", async () => {
 
   try {
     const response = await fetch(
-      "http://localhost:8000/movie/book-movie",
+      "https://learn-with-guvi-book-my-show-backend.onrender.com/movie/book-movie",
       {
         method: "POST",
         headers: {
@@ -145,7 +142,9 @@ document.getElementById("submitBooking").addEventListener("click", async () => {
       alert("Tickets booked successfully!");
       window.location.reload();
     }
-  } catch (error) {}
+  } catch (error) {
+    alert("Something Went Wrong!");
+  }
 });
 
 function bookTickets(movieId, showId, date) {
